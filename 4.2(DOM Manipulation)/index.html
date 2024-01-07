@@ -1,0 +1,57 @@
+<html>
+<!-- <link rel="stylesheet" href="styles.css" /> -->
+<style>
+    .box {
+        border: 2px solid black;
+        /* Sets a solid black border around the div */
+        padding: 20px;
+        background-color: beige;
+    }
+</style>
+<script>
+    let globalID = 1;
+    function btnClick(id) {
+        const parent = document.getElementById(id)
+        parent.children[2].innerHTML = "Done"
+
+    }
+    function createChild(id, desc, title) {
+        const child = document.createElement('div')
+        const titleChild = document.createElement('div')
+        titleChild.innerHTML = title;
+        const descChild = document.createElement('div')
+        descChild.innerHTML = desc;
+        const btnChild = document.createElement('button')
+        btnChild.setAttribute('onClick', `btnClick(${id})`)
+        btnChild.innerHTML = 'MARK AS DONE'
+        child.appendChild(titleChild)
+        child.appendChild(descChild)
+        child.appendChild(btnChild)
+        child.setAttribute('id', id)
+        return child;
+    }
+    function addMore() {
+        const title = document.getElementById('title').value
+        const desc = document.getElementById('desc').value
+        const parent = document.getElementById('container')
+
+        parent.appendChild(createChild(globalID++, desc, title));
+        document.getElementById('title').value = '';
+        document.getElementById('desc').value = '';
+
+    }
+</script>
+
+<body>
+    <h1>TODO APP</h1>
+    <div class="box">
+        <input id="title" type="text" placeholder="title"></input>
+        <br></br>
+        <input id="desc" type='text' placeholder="description"></input>
+        <br></br>
+        <button title="add more" onclick="addMore()">Add More</button>
+        <div id="container"></div>
+    </div>
+</body>
+
+</html>
